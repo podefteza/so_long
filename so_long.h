@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/06 18:04:33 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:13:40 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,79 +22,118 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000
+#  define BUFFER_SIZE 4096
 # endif
 
-# define WIDTH 720
-# define HEIGHT 720
+# define WIDTH 1024
+# define HEIGHT 768
 
 # define SPRITE_SIZE 64
 # define BACKGROUND_SPRITE "sprites/background.xpm"
-# define PLAYER_RIGHT_SPRITE  "sprites/michael_background.xpm"
-# define PLAYER_LEFT_SPRITE "sprites/michael_left.xpm"
-# define EXIT_SPRITE "sprites/door.xpm"
-/*# define WALL_SPRITE
-# define COLLECTABLE_SPRITE
-# define EXIT_SPRITE*/
+# define WALL_SPRITE "sprites/wall.xpm"
+# define COLLECTIBLE_SPRITE "sprites/collectible.xpm"
+
+# define PLAYER_LEFT_SPRITE "sprites/player_left.xpm"
+# define PLAYER_RIGHT_SPRITE "sprites/player_right.xpm"
+
+# define CLOSED_DOOR_SPRITE "sprites/closed_door.xpm"
+# define OPEN_DOOR_SPRITE "sprites/open_door.xpm"
+
+# define PLAYER_LEFT_CLOSED_DOOR_SPRITE "sprites/closed_door_left.xpm"
+# define PLAYER_RIGHT_CLOSED_DOOR_SPRITE "sprites/closed_door_right.xpm"
+# define PLAYER_LEFT_OPEN_DOOR_SPRITE "sprites/open_door_left.xpm"
+# define PLAYER_RIGHT_OPEN_DOOR_SPRITE "sprites/open_door_right.xpm"
+
+# define WIN_MESSAGE_SPRITE "sprites/win_message.xpm"
+
 
 typedef struct s_minilibx
 {
-	void				*connect_mlx;
-	void				*window_mlx;
-}						t_minilibx;
+	void		*connect_mlx;
+	void		*window_mlx;
+}				t_minilibx;
 
 typedef struct s_map
 {
-	char				**map;
-	char				*buffer;
-	int					lines;
-	int					columns;
-	int					count;
-	char				exit;
-}						t_map;
+	char		**map;
+	char		*buffer;
+	int			lines;
+	int			columns;
+	char		exit;
+}				t_map;
 
 typedef struct s_sprites
 {
-	int					player_position;
-	char				side;
+	int			player_position;
 
-	void				*background;
-	void				*wall;
-	void				*player;
-	void				*player_left;
-	void				*player_right;
-	void				*collectable;
-	void				*exit;
-}						t_sprites;
+	void		*background;
+	void		*wall;
+	void		*player;
+	void		*player_left;
+	void		*player_right;
+
+	void		*player_left_closed_door;
+	void		*player_right_closed_door;
+	void		*player_left_open_door;
+	void		*player_right_open_door;
+
+	void		*collectible;
+	void		*exit;
+}				t_sprites;
 
 typedef struct s_game
 {
-	struct s_minilibx	minilibx;
-	struct s_sprites	sprites;
-	t_map				map;
+	t_minilibx	minilibx;
+	t_sprites	sprites;
+	t_map		map;
 
-	int					steps;
-	int					position_x;
-	int					position_y;
-	int					exit_x;
-	int					exit_y;
+	int			movements;
+	int			position_x;
+	int			position_y;
+	int			exit_x;
+	int			exit_y;
+	int			nr_collectibles;
+	int			*collectible_x;
+	int			*collectible_y;
+	int			nr_walls;
+	int			*wall_x;
+	int			*wall_y;
+	void		*image;
+	char		*addr;
+}				t_game;
 
-	void	*image;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}						t_game;
+// LOAD_SPRITES
+void			load_sprites(t_game *game, int img_size);
 
+// REFRESH_DYNAMIC_ELEMENTS
+void			refresh_dynamic_elements(t_game *game);
+
+// LOAD_STATIC_ELEMENTS
+void			draw_exit(t_game *game);
+void			load_static_elements(t_game *game);
+
+// GAME_SETUP
+void			game_setup(t_game *game, int img_size);
+
+// VALIDATION
+int				initial_check(int argc, char **argv);
+int				map_checker(char *argv, t_game *game);
+void			count_collectibles(t_game *game);
+void			count_walls(t_game *game);
+void			scan_map(t_game *game);
+
+// MOVE_PLAYER
+int				handle_key(int key, t_game *game);
 
 // LIBFT
-void					ft_putnbr_fd(int n, int fd);
-void					ft_putstr_fd(char *s, int fd);
-size_t					ft_strlen(const char *s);
-int						ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s);
+void			ft_putnbr_fd(int n, int fd);
+void			ft_putstr_fd(char *s, int fd);
+size_t			ft_strlen(const char *s);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_strdup(const char *s);
 
-char	**ft_split(t_game *game, char c);
+char			**ft_split(t_game *game, char c);
+char			*ft_itoa(int n);
 
 #endif
