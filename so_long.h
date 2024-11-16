@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/15 11:13:40 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:47:45 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,15 @@
 # define BACKGROUND_SPRITE "sprites/background.xpm"
 # define WALL_SPRITE "sprites/wall.xpm"
 # define COLLECTIBLE_SPRITE "sprites/collectible.xpm"
-
 # define PLAYER_LEFT_SPRITE "sprites/player_left.xpm"
 # define PLAYER_RIGHT_SPRITE "sprites/player_right.xpm"
 
 # define CLOSED_DOOR_SPRITE "sprites/closed_door.xpm"
 # define OPEN_DOOR_SPRITE "sprites/open_door.xpm"
-
 # define PLAYER_LEFT_CLOSED_DOOR_SPRITE "sprites/closed_door_left.xpm"
 # define PLAYER_RIGHT_CLOSED_DOOR_SPRITE "sprites/closed_door_right.xpm"
 # define PLAYER_LEFT_OPEN_DOOR_SPRITE "sprites/open_door_left.xpm"
 # define PLAYER_RIGHT_OPEN_DOOR_SPRITE "sprites/open_door_right.xpm"
-
-# define WIN_MESSAGE_SPRITE "sprites/win_message.xpm"
-
 
 typedef struct s_minilibx
 {
@@ -71,12 +66,10 @@ typedef struct s_sprites
 	void		*player;
 	void		*player_left;
 	void		*player_right;
-
 	void		*player_left_closed_door;
 	void		*player_right_closed_door;
 	void		*player_left_open_door;
 	void		*player_right_open_door;
-
 	void		*collectible;
 	void		*exit;
 }				t_sprites;
@@ -100,6 +93,8 @@ typedef struct s_game
 	int			*wall_y;
 	void		*image;
 	char		*addr;
+	char		last_direction;
+	int			win_state;
 }				t_game;
 
 // LOAD_SPRITES

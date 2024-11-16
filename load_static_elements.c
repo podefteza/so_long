@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:44:35 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/13 10:14:17 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:47:02 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,43 @@ void	draw_collectibles(t_game *game)
 
 void	draw_exit(t_game *game)
 {
-	int	img_size;
+    if (game->nr_collectibles > 0)
+    {
+        if (game->position_x == game->exit_x && game->position_y == game->exit_y)
+        {
+            if (game->last_direction == 'L')
+                game->sprites.exit = game->sprites.player_left_closed_door;
+            else
+                game->sprites.exit = game->sprites.player_right_closed_door;
+        }
+        else
+        {
+            game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+                CLOSED_DOOR_SPRITE, &(int){SPRITE_SIZE}, &(int){SPRITE_SIZE});
+        }
+    }
+    else
+    {
+        if (game->position_x == game->exit_x && game->position_y == game->exit_y)
+        {
+            if (game->last_direction == 'L')
+                game->sprites.exit = game->sprites.player_left_open_door;
+            else
+                game->sprites.exit = game->sprites.player_right_open_door;
+        }
+        else
+        {
+            game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+                OPEN_DOOR_SPRITE, &(int){SPRITE_SIZE}, &(int){SPRITE_SIZE});
+        }
+    }
 
-	img_size = SPRITE_SIZE;
-	if (game->nr_collectibles > 0)
-		game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-				CLOSED_DOOR_SPRITE, &img_size, &img_size);
-	else
-		game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-				OPEN_DOOR_SPRITE, &img_size, &img_size);
-	mlx_put_image_to_window(game->minilibx.connect_mlx,
-		game->minilibx.window_mlx, game->sprites.exit, SPRITE_SIZE
-		* game->exit_x, SPRITE_SIZE * game->exit_y);
+    mlx_put_image_to_window(game->minilibx.connect_mlx,
+        game->minilibx.window_mlx, game->sprites.exit, SPRITE_SIZE
+        * game->exit_x, SPRITE_SIZE * game->exit_y);
 }
+
+
 
 void	load_static_elements(t_game *game)
 {

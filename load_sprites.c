@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:17:54 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/15 11:13:37 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:47:04 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ void	load_sprites(t_game *game, int img_size)
 			COLLECTIBLE_SPRITE, &img_size, &img_size);
 	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			WALL_SPRITE, &img_size, &img_size);
-	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	game->sprites.player_left_closed_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			PLAYER_LEFT_CLOSED_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	game->sprites.player_right_closed_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			PLAYER_RIGHT_CLOSED_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	game->sprites.player_left_open_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			PLAYER_LEFT_OPEN_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	game->sprites.player_right_open_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			PLAYER_RIGHT_OPEN_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-			WIN_MESSAGE_SPRITE, &img_size, &img_size);
 }
