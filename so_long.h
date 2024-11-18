@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/16 12:47:45 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:37:48 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,22 @@
 # define HEIGHT 768
 
 # define SPRITE_SIZE 64
-# define BACKGROUND_SPRITE "sprites/background.xpm"
+# define BG_SPRITE "sprites/background.xpm"
 # define WALL_SPRITE "sprites/wall.xpm"
-# define COLLECTIBLE_SPRITE "sprites/collectible.xpm"
-# define PLAYER_LEFT_SPRITE "sprites/player_left.xpm"
-# define PLAYER_RIGHT_SPRITE "sprites/player_right.xpm"
+# define COLLECT_SPRITE "sprites/collectible.xpm"
+# define P_L_SPRITE "sprites/player_left.xpm"
+# define P_R_SPRITE "sprites/player_right.xpm"
 
-# define CLOSED_DOOR_SPRITE "sprites/closed_door.xpm"
-# define OPEN_DOOR_SPRITE "sprites/open_door.xpm"
-# define PLAYER_LEFT_CLOSED_DOOR_SPRITE "sprites/closed_door_left.xpm"
-# define PLAYER_RIGHT_CLOSED_DOOR_SPRITE "sprites/closed_door_right.xpm"
-# define PLAYER_LEFT_OPEN_DOOR_SPRITE "sprites/open_door_left.xpm"
-# define PLAYER_RIGHT_OPEN_DOOR_SPRITE "sprites/open_door_right.xpm"
+# define WIN1 "sprites/win1.xpm"
+# define WIN2 "sprites/win2.xpm"
+# define WIN3 "sprites/win3.xpm"
+
+# define C_DOOR_SPRITE "sprites/closed_door.xpm"
+# define O_DOOR_SPRITE "sprites/open_door.xpm"
+# define P_L_C_DOOR_SPRITE "sprites/player_left_closed_door.xpm"
+# define P_R_C_DOOR_SPRITE "sprites/player_right_closed_door.xpm"
+# define P_L_O_DOOR_SPRITE "sprites/player_left_win.xpm"
+# define P_R_O_DOOR_SPRITE "sprites/player_right_win.xpm"
 
 typedef struct s_minilibx
 {
@@ -64,13 +68,16 @@ typedef struct s_sprites
 	void		*background;
 	void		*wall;
 	void		*player;
-	void		*player_left;
-	void		*player_right;
-	void		*player_left_closed_door;
-	void		*player_right_closed_door;
-	void		*player_left_open_door;
-	void		*player_right_open_door;
-	void		*collectible;
+	void		*p_left;
+	void		*p_right;
+	void		*p_l_c_door;
+	void		*p_r_c_door;
+	void		*p_l_o_door;
+	void		*p_r_o_door;
+	void		*collect;
+	void		*win1;
+	void		*win2;
+	void		*win3;
 	void		*exit;
 }				t_sprites;
 
@@ -83,8 +90,10 @@ typedef struct s_game
 	int			movements;
 	int			position_x;
 	int			position_y;
+	int			player_count;
 	int			exit_x;
 	int			exit_y;
+	int			exit_count;
 	int			nr_collectibles;
 	int			*collectible_x;
 	int			*collectible_y;
@@ -97,25 +106,28 @@ typedef struct s_game
 	int			win_state;
 }				t_game;
 
-// LOAD_SPRITES
-void			load_sprites(t_game *game, int img_size);
-
-// REFRESH_DYNAMIC_ELEMENTS
-void			refresh_dynamic_elements(t_game *game);
-
-// LOAD_STATIC_ELEMENTS
-void			draw_exit(t_game *game);
-void			load_static_elements(t_game *game);
-
-// GAME_SETUP
-void			game_setup(t_game *game, int img_size);
-
 // VALIDATION
-int				initial_check(int argc, char **argv);
+int				extension_check(int argc, char **argv);
 int				map_checker(char *argv, t_game *game);
 void			count_collectibles(t_game *game);
 void			count_walls(t_game *game);
 void			scan_map(t_game *game);
+int	error_output(char *error);
+int	check_character_count(t_game *game);
+int	check_rectangular(t_game *game);
+int	check_walls(t_game *game);
+int check_valid_path(t_game *game);
+
+
+// LOAD AND REFRESH SPRITES
+void			load_sprites(t_game *game, int img_size);
+void			refresh_dynamic_elements(t_game *game);
+void			draw_exit(t_game *game);
+void			draw_background(t_game *game);
+void			load_static_elements(t_game *game);
+
+// GAME_SETUP
+void			game_setup(t_game *game, int img_size);
 
 // MOVE_PLAYER
 int				handle_key(int key, t_game *game);
@@ -127,7 +139,6 @@ size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strdup(const char *s);
-
 char			**ft_split(t_game *game, char c);
 char			*ft_itoa(int n);
 

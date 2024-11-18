@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:44:35 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/16 12:47:02 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:23:21 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	draw_background(t_game *game)
 {
-	int l, c;
+	int	l;
+	int	c;
+
 	l = 0;
 	while (l < game->map.lines)
 	{
@@ -52,51 +54,11 @@ void	draw_collectibles(t_game *game)
 	while (i < game->nr_collectibles)
 	{
 		mlx_put_image_to_window(game->minilibx.connect_mlx,
-			game->minilibx.window_mlx, game->sprites.collectible, SPRITE_SIZE
+			game->minilibx.window_mlx, game->sprites.collect, SPRITE_SIZE
 			* game->collectible_x[i], SPRITE_SIZE * game->collectible_y[i]);
 		i++;
 	}
 }
-
-void	draw_exit(t_game *game)
-{
-    if (game->nr_collectibles > 0)
-    {
-        if (game->position_x == game->exit_x && game->position_y == game->exit_y)
-        {
-            if (game->last_direction == 'L')
-                game->sprites.exit = game->sprites.player_left_closed_door;
-            else
-                game->sprites.exit = game->sprites.player_right_closed_door;
-        }
-        else
-        {
-            game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-                CLOSED_DOOR_SPRITE, &(int){SPRITE_SIZE}, &(int){SPRITE_SIZE});
-        }
-    }
-    else
-    {
-        if (game->position_x == game->exit_x && game->position_y == game->exit_y)
-        {
-            if (game->last_direction == 'L')
-                game->sprites.exit = game->sprites.player_left_open_door;
-            else
-                game->sprites.exit = game->sprites.player_right_open_door;
-        }
-        else
-        {
-            game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-                OPEN_DOOR_SPRITE, &(int){SPRITE_SIZE}, &(int){SPRITE_SIZE});
-        }
-    }
-
-    mlx_put_image_to_window(game->minilibx.connect_mlx,
-        game->minilibx.window_mlx, game->sprites.exit, SPRITE_SIZE
-        * game->exit_x, SPRITE_SIZE * game->exit_y);
-}
-
-
 
 void	load_static_elements(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/16 12:41:12 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:34:47 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ implement function to read the screen size and resize the map if needed
 
 use of sprites to display the digits of the score in the window
 
-
+TEST:
 
 */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 
 	img_size = SPRITE_SIZE;
 	game.movements = 0;
-	if (initial_check(argc, argv) == 1)
+	if (extension_check(argc, argv) == 1)
 		exit(0);
 
 	// handle errors reading map...
