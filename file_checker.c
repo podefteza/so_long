@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:22:03 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/21 10:41:03 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:49:33 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	map_checker(char *argv, t_game *game)
 	close(fd);
 	game->map.buffer[count] = '\0';
 	game->map.map = ft_split(game, '\n');
-	free(game->map.buffer);
 	if (!game->map.map)
 		return (error_output("Failed to split map into lines.\n", game));
+	free(game->map.buffer);
 	if (!player_count(game) || !check_rectangular(game)
 		|| !check_walls(game) || !check_valid_path(game))
 		free_map(game);

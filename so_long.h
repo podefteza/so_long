@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 11:55:31 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:24:42 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_sprites
 	void		*win2;
 	void		*win3;
 	void		*exit;
+	void		*exit_closed;
+	void		*exit_open;
 }				t_sprites;
 
 typedef struct s_game

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:17:54 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 11:55:37 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:25:23 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	load_sprites(t_game *game, int img_size)
 {
 	game->sprites.background = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			BG_SPRITE, &img_size, &img_size);
-	game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	game->sprites.exit_closed = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			C_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-			C_DOOR_SPRITE, &img_size, &img_size);
+	game->sprites.exit = game->sprites.exit_closed;
+	game->sprites.exit_open = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+			O_DOOR_SPRITE, &img_size, &img_size);
 	game->sprites.collect = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			COLLECT_SPRITE, &img_size, &img_size);
 	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,

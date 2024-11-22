@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 11:58:15 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:09:10 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ TEST:
 
 #include "so_long.h"
 
-void	hooks(t_game *game)
-{
-	mlx_hook(game->minilibx.window_mlx, 2, 1, handle_key, game);
-	mlx_loop(game->minilibx.connect_mlx);
-}
+
 
 void start_game(t_game *game)
 {
@@ -97,6 +93,13 @@ void start_game(t_game *game)
 	// Initialize MinilibX connection and window pointers
 	game->minilibx.connect_mlx = NULL;
 	game->minilibx.window_mlx = NULL;
+}
+
+
+void	hooks(t_game *game)
+{
+	mlx_hook(game->minilibx.window_mlx, 2, 1, handle_key, game);
+	mlx_loop(game->minilibx.connect_mlx);
 }
 
 

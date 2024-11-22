@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 11:59:49 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:17:52 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ void free_sprites(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.collect);
 		game->sprites.collect = NULL;
 	}
+	if (game->sprites.exit_closed)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit_closed);
+	if (game->sprites.exit)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit);
 	/*
 	if (game->sprites.p_right)
 	{
@@ -136,6 +140,7 @@ void	cleanup_and_exit(t_game *game, int exit_code)
 	free_collectibles(game);
 	free_walls(game);
 	free_map(game);
+
 
 
 	// Free MinilibX resources
