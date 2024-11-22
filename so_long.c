@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 14:09:10 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:14:53 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Libft authorized: Yes
 */
 
 /*TODO:
-X press on window to quit the game
+X press on window to quit the game >>>>>>>>>>>>>>>>>> check leaks when closing game or pressing ESC
 
 make Exit walkable
 swap Exit with X when player is on the exit but not all collectibles are collected and create sprite of player on top of closede door
@@ -96,11 +96,24 @@ void start_game(t_game *game)
 }
 
 
+#include "mlx.h"
+
+// Function to handle the close event
+int	close_window(t_game *game)
+{
+	error_output("", game); // Make sure to free any allocated memory and clean up resources
+	exit(1); // Exit the program
+	return (0);
+}
+
+// Updated hooks function
 void	hooks(t_game *game)
 {
-	mlx_hook(game->minilibx.window_mlx, 2, 1, handle_key, game);
+	mlx_hook(game->minilibx.window_mlx, 2, 1L << 0, handle_key, game); // Key press
+	mlx_hook(game->minilibx.window_mlx, 17, 0, close_window, game); // Close window (DestroyNotify)
 	mlx_loop(game->minilibx.connect_mlx);
 }
+
 
 
 int	main(int argc, char **argv)

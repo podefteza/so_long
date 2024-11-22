@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 17:45:54 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:14:23 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ void free_sprites(t_game *game)
 
 
 
-	/*if (game->sprites.p_right)
+	if (game->sprites.p_right)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_right);
 		game->sprites.p_right = NULL;
 	}
-	if (game->sprites.p_left)
+	/*if (game->sprites.p_left)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_left);
 		game->sprites.p_left = NULL;
@@ -153,14 +153,8 @@ void	cleanup_and_exit(t_game *game, int exit_code)
 		mlx_destroy_display(game->minilibx.connect_mlx);
 		free(game->minilibx.connect_mlx);
 	}
-	// Set pointers to NULL
 	game->minilibx.window_mlx = NULL;
 	game->minilibx.connect_mlx = NULL;
-	/*printf("Pointer to exit:%p\n", game->sprites.exit_open);
-	printf("Pointer to exit:%p\n", game->sprites.exit);
-	printf("Pointer to exit:%p\n", game->sprites.p_left);
-	printf("Pointer to exit:%p\n", game->sprites.p_right);
-	printf("Pointer to exit:%p\n", game->sprites.wall);*/
 	exit(exit_code);
 }
 
