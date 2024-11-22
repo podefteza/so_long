@@ -6,7 +6,7 @@
 #    By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 09:29:40 by carlos-j          #+#    #+#              #
-#    Updated: 2024/11/13 10:45:51 by carlos-j         ###   ########.fr        #
+#    Updated: 2024/11/21 10:28:38 by carlos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,18 @@ MINILIBXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
 SRCS = so_long.c \
 		validation.c \
 		load_sprites.c \
+        load_exit.c \
 		load_static_elements.c \
 		refresh_dynamic_elements.c \
 		game_setup.c \
 		move_player.c \
+		file_checker.c \
+		error.c \
+		scan_map.c \
+		flood_fill.c \
+		exit.c \
+		map_content_checker.c \
+		map_objects_count.c \
 		libft/ft_putnbr_fd.c \
 		libft/ft_putstr_fd.c \
 		libft/ft_strlen.c \
@@ -51,5 +59,17 @@ fclean: clean
 
 re: fclean all
 	@echo "Recompiled all files."
+
+character_dwight:
+	@cp sprites/dwight/*.xpm sprites/
+	@echo "You chose Dwight as your character."
+
+character_kevin:
+	@cp sprites/kevin/*.xpm sprites/
+	@echo "You chose Kevin as your character."
+
+character_stanley:
+	@cp sprites/stanley/*.xpm sprites/
+	@echo "You chose Stanley as your character."
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:33:01 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 09:15:48 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:46:04 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,9 @@ void	game_setup(t_game *game, int img_size)
 	mlx_put_image_to_window(game->minilibx.connect_mlx,
 		game->minilibx.window_mlx, game->sprites.player, SPRITE_SIZE
 		* game->position_x, SPRITE_SIZE * game->position_y);
+	/*printf("Pointer to exit:%p\n", game->sprites.exit_open);
+	printf("Pointer to exit:%p\n", game->sprites.exit);
+	printf("Pointer to exit:%p\n", game->sprites.p_left);
+	printf("Pointer to exit:%p\n", game->sprites.p_right);
+	printf("Pointer to exit:%p\n", game->sprites.wall);*/
 }

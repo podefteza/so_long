@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:17:54 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 14:25:23 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:38:06 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	player_sprites(t_game *game, int img_size)
 	game->sprites.p_right = game->sprites.player;
 	game->sprites.p_left = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			P_L_SPRITE, &img_size, &img_size);
+	//game->sprites.p_left = game->sprites.player;
 	game->sprites.p_l_c_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			P_L_C_DOOR_SPRITE, &img_size, &img_size);
 	game->sprites.p_r_c_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,

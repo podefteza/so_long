@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:08 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 14:25:23 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:48:47 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	draw_exit(t_game *game)
 {
 	if (game->nr_collectibles > 0) // Door is still closed
 	{
+
 		if (game->position_x == game->exit_x
 			&& game->position_y == game->exit_y)
 		{
@@ -26,6 +27,7 @@ void	draw_exit(t_game *game)
 		}
 		else
 		{
+
 			game->sprites.exit = game->sprites.exit_closed;
 		}
 	}
@@ -34,6 +36,8 @@ void	draw_exit(t_game *game)
 		if (game->position_x == game->exit_x
 			&& game->position_y == game->exit_y)
 		{
+			if (game->sprites.exit)
+				mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit);
 			if (game->last_direction == 'L')
 				game->sprites.exit = game->sprites.p_l_o_door;
 			else
@@ -41,9 +45,9 @@ void	draw_exit(t_game *game)
 		}
 		else
 		{
-			//if (game->sprites.exit)
+			//if (game->sprites.exit_closed)
 			//	mlx_destroy_image(game->minilibx.connect_mlx,
-			//		game->sprites.exit); // Free old sprite
+			//		game->sprites.exit_closed); // Free old sprite
 			game->sprites.exit = game->sprites.exit_open;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 14:17:52 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:45:54 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ void	free_map(t_game *game)
 
 void free_sprites(t_game *game)
 {
-    if (game->sprites.player)
+	if (game->sprites.player)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.player);
 		game->sprites.player = NULL;
 	}
+
 	if (game->sprites.win1)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.win1);
@@ -78,6 +79,7 @@ void free_sprites(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.win3);
 		game->sprites.win3 = NULL;
 	}
+
 	if (game->sprites.p_l_c_door)
 	{
         mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_l_c_door);
@@ -104,46 +106,46 @@ void free_sprites(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.background);
 		game->sprites.background = NULL;
 	}
+
 	if (game->sprites.collect)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.collect);
 		game->sprites.collect = NULL;
 	}
+
 	if (game->sprites.exit_closed)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit_closed);
-	if (game->sprites.exit)
-		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit);
-	/*
-	if (game->sprites.p_right)
+
+
+
+	/*if (game->sprites.p_right)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_right);
 		game->sprites.p_right = NULL;
 	}
-	if (game->sprites.wall)
-		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.wall);
-
-
 	if (game->sprites.p_left)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_left);
 		game->sprites.p_left = NULL;
-	}
-	if (game->sprites.exit)
-        mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit);*/
+	}*/
+
+/*
+	if (game->sprites.wall)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.wall);
+*/
 }
 
 
 void	cleanup_and_exit(t_game *game, int exit_code)
 {
 	// Free dynamically allocated game objects
-	//free_sprites(game);
+
 	free_collectibles(game);
 	free_walls(game);
 	free_map(game);
-
-
-
+	free_sprites(game);
 	// Free MinilibX resources
+	mlx_destroy_image(game->minilibx.connect_mlx, game->image);
 	if (game->minilibx.window_mlx)
 		mlx_destroy_window(game->minilibx.connect_mlx, game->minilibx.window_mlx);
 	if (game->minilibx.connect_mlx)
@@ -154,7 +156,11 @@ void	cleanup_and_exit(t_game *game, int exit_code)
 	// Set pointers to NULL
 	game->minilibx.window_mlx = NULL;
 	game->minilibx.connect_mlx = NULL;
-	//free(game);
+	/*printf("Pointer to exit:%p\n", game->sprites.exit_open);
+	printf("Pointer to exit:%p\n", game->sprites.exit);
+	printf("Pointer to exit:%p\n", game->sprites.p_left);
+	printf("Pointer to exit:%p\n", game->sprites.p_right);
+	printf("Pointer to exit:%p\n", game->sprites.wall);*/
 	exit(exit_code);
 }
 
