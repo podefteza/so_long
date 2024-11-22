@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/18 18:37:48 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:55:31 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4096
+#  define BUFFER_SIZE 2048
 # endif
 
 # define WIDTH 1024
@@ -45,6 +45,13 @@
 # define P_R_C_DOOR_SPRITE "sprites/player_right_closed_door.xpm"
 # define P_L_O_DOOR_SPRITE "sprites/player_left_win.xpm"
 # define P_R_O_DOOR_SPRITE "sprites/player_right_win.xpm"
+
+typedef struct s_flood_fill
+{
+	int			directions[4][2];
+	int			collected;
+	int			exit_reached;
+}				t_flood_fill;
 
 typedef struct s_minilibx
 {
@@ -106,25 +113,59 @@ typedef struct s_game
 	int			win_state;
 }				t_game;
 
+// EXIT
+void			free_collectibles(t_game *game);
+void			free_walls(t_game *game);
+void			free_map(t_game *game);
+void			cleanup_and_exit(t_game *game, int exit_code);
+void			free_sprites(t_game *game);
+
+// MAP OBJECTS COUNT
+int				player_count(t_game *game);
+void			count_collectibles(t_game *game);
+void			count_walls(t_game *game);
+
+// FLOOD FILL HELPER FUNCTIONS
+void			reset_collectibles(t_game *game);
+void			init_directions(int directions[4][2]);
+void			process_cell(t_game *game, int x, int y, t_flood_fill *state);
+void			explore_neighbors(t_game *game, int x, int y,
+					t_flood_fill *state);
+
 // VALIDATION
-int				extension_check(int argc, char **argv);
+void			flood_fill(t_game *game, int x, int y, t_flood_fill *state);
+
+int				extension_check(int argc, char **argv, t_game *game);
 int				map_checker(char *argv, t_game *game);
 void			count_collectibles(t_game *game);
 void			count_walls(t_game *game);
 void			scan_map(t_game *game);
-int	error_output(char *error);
-int	check_character_count(t_game *game);
-int	check_rectangular(t_game *game);
-int	check_walls(t_game *game);
-int check_valid_path(t_game *game);
+int				player_count(t_game *game);
+int				check_rectangular(t_game *game);
+int				check_walls(t_game *game);
+int				check_valid_path(t_game *game);
 
+// MAP CONTENT CHECKER
+int				check_rectangular(t_game *game);
+void			count_collectibles(t_game *game);
+void			count_walls(t_game *game);
+
+// SCAN MAP
+void			scan_map(t_game *game);
+
+// ERROR
+int				error_output(char *error, t_game *game);
+void			free_map(t_game *game);
 
 // LOAD AND REFRESH SPRITES
+void			player_sprites(t_game *game, int img_size);
 void			load_sprites(t_game *game, int img_size);
 void			refresh_dynamic_elements(t_game *game);
 void			draw_exit(t_game *game);
 void			draw_background(t_game *game);
 void			load_static_elements(t_game *game);
+void			free_player_sprites(t_game *game);
+void			free_load_sprites(t_game *game);
 
 // GAME_SETUP
 void			game_setup(t_game *game, int img_size);

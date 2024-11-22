@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:17:54 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/18 15:15:47 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:55:37 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	player_sprites(t_game *game, int img_size)
 {
 	game->sprites.player = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			P_R_SPRITE, &img_size, &img_size);
-	game->sprites.p_right = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-			P_R_SPRITE, &img_size, &img_size);
+	game->sprites.p_right = game->sprites.player;
 	game->sprites.p_left = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			P_L_SPRITE, &img_size, &img_size);
 	game->sprites.p_l_c_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
@@ -36,6 +35,8 @@ void	load_sprites(t_game *game, int img_size)
 			BG_SPRITE, &img_size, &img_size);
 	game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			C_DOOR_SPRITE, &img_size, &img_size);
+	game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+			C_DOOR_SPRITE, &img_size, &img_size);
 	game->sprites.collect = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			COLLECT_SPRITE, &img_size, &img_size);
 	game->sprites.wall = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
@@ -46,5 +47,4 @@ void	load_sprites(t_game *game, int img_size)
 			&img_size, &img_size);
 	game->sprites.win3 = mlx_xpm_file_to_image(game->minilibx.connect_mlx, WIN3,
 			&img_size, &img_size);
-	player_sprites(game, img_size);
 }
