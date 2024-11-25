@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:33:01 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/23 12:26:00 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:14:31 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	screen_check(t_game *game)
 	window_width = SPRITE_SIZE * game->map.columns;
 	window_height = SPRITE_SIZE * game->map.lines;
 	if (window_width > screen_width || window_height > screen_height)
-		cleanup_and_exit(game, "Error\nMap too large to fit the screen.\n", 1);
+		cleanup_and_exit(game, "Error\nMap too large to fit the screen.\n", 42);
 	game->minilibx.window_mlx = mlx_new_window(game->minilibx.connect_mlx,
 			window_width, window_height, "so_long");
 	game->image = mlx_new_image(game->minilibx.connect_mlx, window_width,
@@ -45,9 +45,4 @@ void	game_setup(t_game *game, int img_size)
 	mlx_put_image_to_window(game->minilibx.connect_mlx,
 		game->minilibx.window_mlx, game->sprites.player, SPRITE_SIZE
 		* game->position_x, SPRITE_SIZE * game->position_y);
-	/*printf("Pointer to exit:%p\n", game->sprites.exit_open);
-	printf("Pointer to exit:%p\n", game->sprites.exit);
-	printf("Pointer to exit:%p\n", game->sprites.p_left);
-	printf("Pointer to exit:%p\n", game->sprites.p_right);
-	printf("Pointer to exit:%p\n", game->sprites.wall);*/
 }

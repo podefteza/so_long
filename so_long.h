@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 10:04:09 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:24:21 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_map
 {
 	char		**map;
 	char		*buffer;
+	int			map_read_fd;
 	int			lines;
 	int			columns;
 	char		exit;
@@ -86,9 +87,21 @@ typedef struct s_sprites
 	void		*win2;
 	void		*win3;
 	void		*exit;
-	void		*exit_closed;
+	void		*ex_closed;
 	void		*exit_open;
 }				t_sprites;
+
+typedef struct s_center
+{
+	int			center_x;
+	int			center_y;
+	int			sprite1_x;
+	int			sprite2_x;
+	int			sprite3_x;
+	int			sprite_y;
+	int			message_x;
+	int			message_y;
+}				t_center;
 
 typedef struct s_game
 {
@@ -119,8 +132,9 @@ typedef struct s_game
 void			free_collectibles(t_game *game);
 void			free_walls(t_game *game);
 void			free_map(t_game *game);
-int	cleanup_and_exit(t_game *game, char *error, int exit_code);
-void			free_sprites(t_game *game, int exit_code);
+int				cleanup_and_exit(t_game *game, char *error, int exit_code);
+void			free_player_sprites(t_game *game, int exit_code);
+void			free_map_sprites(t_game *game, int exit_code);
 
 // MAP OBJECTS COUNT
 int				player_count(t_game *game);
@@ -156,7 +170,7 @@ void			count_walls(t_game *game);
 void			scan_map(t_game *game);
 
 // ERROR
-//int				error_output(char *error, t_game *game);
+// int				error_output(char *error, t_game *game);
 void			free_map(t_game *game);
 
 // LOAD AND REFRESH SPRITES
@@ -166,8 +180,6 @@ void			refresh_dynamic_elements(t_game *game);
 void			draw_exit(t_game *game);
 void			draw_background(t_game *game);
 void			load_static_elements(t_game *game);
-void			free_player_sprites(t_game *game);
-void			free_load_sprites(t_game *game);
 
 // GAME_SETUP
 void			game_setup(t_game *game, int img_size);

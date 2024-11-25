@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:30:25 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/23 11:58:18 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:15:22 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ int	check_valid_path(t_game *game)
 	count_collectibles(game);
 	flood_fill(game, game->position_x, game->position_y, &state);
 	if (state.exit_reached == 0)
-		cleanup_and_exit(game, "Error\n Invalid map. Impossible to reach the exit.\n", 0);
+	{
+		ft_putstr_fd("Error\nInvalid map. ", 1);
+		cleanup_and_exit(game, "Impossible to reach the exit.\n", 42);
+	}
 	if (state.collected < game->nr_collectibles)
 	{
-		ft_putstr_fd("Error\n", 2);
-		cleanup_and_exit(game, "Invalid map. Not all collectibles can be reached.\n", 0);
+		ft_putstr_fd("Error\nInvalid map. ", 1);
+		cleanup_and_exit(game, "Not all collectibles can be reached.\n", 42);
 	}
 	reset_collectibles(game);
 	return (state.collected == game->nr_collectibles && state.exit_reached);
