@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/23 11:57:47 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:04:09 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void			free_collectibles(t_game *game);
 void			free_walls(t_game *game);
 void			free_map(t_game *game);
 int	cleanup_and_exit(t_game *game, char *error, int exit_code);
-void			free_sprites(t_game *game);
+void			free_sprites(t_game *game, int exit_code);
 
 // MAP OBJECTS COUNT
 int				player_count(t_game *game);

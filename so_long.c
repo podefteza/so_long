@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/23 13:05:22 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:37:26 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ Libft authorized: Yes
 */
 
 /*TODO:
+
+- fix when quitting game and facing left
 
 use of sprites to display the digits of the score in the window
 
@@ -47,7 +49,8 @@ void start_game(t_game *game)
 	game->sprites.win2 = NULL;
 	game->sprites.win3 = NULL;
 	game->sprites.exit = NULL;
-
+	game->sprites.exit_closed = NULL;
+	game->sprites.exit_open = NULL;
 
 	// Initialize map-related variables
 	game->map.map = NULL;
@@ -75,22 +78,20 @@ void start_game(t_game *game)
 	game->last_direction = '\0'; // if player is on the left of the map, load R, otherwise, load L
 	game->win_state = 0;
 
-	// Initialize MinilibX connection and window pointers
 	game->minilibx.connect_mlx = NULL;
 	game->minilibx.window_mlx = NULL;
 }
 
 int	exit_game(t_game *game)
 {
-    cleanup_and_exit(game, "You quit the game.\n", 1);
-    return 0; // This return statement is necessary to satisfy the function signature
+    cleanup_and_exit(game, "Error\nYou quit the game.\n", 1);
+    return 0;
 }
 
-// Updated hooks function
 void	hooks(t_game *game)
 {
-	mlx_hook(game->minilibx.window_mlx, 2, 1L << 0, handle_key, game); // Key press
-	mlx_hook(game->minilibx.window_mlx, 17, 0, &exit_game, game); // Close window (DestroyNotify)
+	mlx_hook(game->minilibx.window_mlx, 2, 1L << 0, handle_key, game);
+	mlx_hook(game->minilibx.window_mlx, 17, 0, &exit_game, game);
 	mlx_loop(game->minilibx.connect_mlx);
 }
 

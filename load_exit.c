@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:08 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 21:28:18 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:47:09 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	draw_exit(t_game *game)
 {
-	if (game->nr_collectibles > 0) // Door is still closed
+	int img_size = 64;
+
+	if (game->nr_collectibles > 0)
 	{
 
 		if (game->position_x == game->exit_x
@@ -31,17 +33,37 @@ void	draw_exit(t_game *game)
 			game->sprites.exit = game->sprites.exit_closed;
 		}
 	}
-	else // Door can open
+	else
 	{
 		if (game->position_x == game->exit_x
 			&& game->position_y == game->exit_y)
 		{
+			if ((game->sprites.p_left) && (game->last_direction != 'L'))
+			{
+				mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_left);
+				game->sprites.p_left = NULL;
+				//printf("destroyed sprites.p_left\n");
+			}
+			else if ((game->sprites.p_left) && (game->last_direction != 'R'))
+			{
+				mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_right);
+				game->sprites.p_right = NULL;
+				//printf("destroyed sprites.p_right\n");
+			}
+
 			if (game->sprites.exit)
 				mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit);
 			if (game->last_direction == 'L')
-				game->sprites.exit = game->sprites.p_l_o_door;
+			{
+
+				game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+			P_L_O_DOOR_SPRITE, &img_size, &img_size);
+			}
 			else
-				game->sprites.exit = game->sprites.p_r_o_door;
+				{
+					game->sprites.exit = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+			P_R_O_DOOR_SPRITE, &img_size, &img_size);
+				}
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:17:54 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/23 12:30:24 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:16:33 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	player_sprites(t_game *game, int img_size)
 			P_L_C_DOOR_SPRITE, &img_size, &img_size);
 	game->sprites.p_r_c_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			P_R_C_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.p_l_o_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-			P_L_O_DOOR_SPRITE, &img_size, &img_size);
-	game->sprites.p_r_o_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
-			P_R_O_DOOR_SPRITE, &img_size, &img_size);
+	//game->sprites.p_l_o_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	//		P_L_O_DOOR_SPRITE, &img_size, &img_size);
+	//game->sprites.p_r_o_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+	//		P_R_O_DOOR_SPRITE, &img_size, &img_size);
+	//game->sprites.p_r_o_door = game->sprites.p_l_o_door;
 }
 
 void	load_sprites(t_game *game, int img_size)
