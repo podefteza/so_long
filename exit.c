@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 22:14:23 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:48:48 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void free_sprites(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.win3);
 		game->sprites.win3 = NULL;
 	}
-
 	if (game->sprites.p_l_c_door)
 	{
         mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_l_c_door);
@@ -100,7 +99,6 @@ void free_sprites(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_r_o_door);
 		game->sprites.p_r_o_door = NULL;
 	}
-
 	if (game->sprites.background)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.background);
@@ -114,10 +112,10 @@ void free_sprites(t_game *game)
 	}
 
 	if (game->sprites.exit_closed)
+	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit_closed);
-
-
-
+		game->sprites.exit_closed = NULL;
+	}
 	if (game->sprites.p_right)
 	{
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_right);
@@ -136,25 +134,28 @@ void free_sprites(t_game *game)
 }
 
 
-void	cleanup_and_exit(t_game *game, int exit_code)
+int	cleanup_and_exit(t_game *game, char *error, int exit_code)
 {
+
+	ft_putstr_fd(error, 2); // Message when quiting the game...
 	// Free dynamically allocated game objects
 
 	free_collectibles(game);
 	free_walls(game);
 	free_map(game);
-	free_sprites(game);
+
 	// Free MinilibX resources
-	mlx_destroy_image(game->minilibx.connect_mlx, game->image);
+	if (game->image)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->image);
 	if (game->minilibx.window_mlx)
 		mlx_destroy_window(game->minilibx.connect_mlx, game->minilibx.window_mlx);
+	if (exit_code != 1)
+		free_sprites(game);
 	if (game->minilibx.connect_mlx)
 	{
 		mlx_destroy_display(game->minilibx.connect_mlx);
 		free(game->minilibx.connect_mlx);
 	}
-	game->minilibx.window_mlx = NULL;
-	game->minilibx.connect_mlx = NULL;
 	exit(exit_code);
 }
 

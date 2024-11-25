@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 08:50:33 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/21 10:41:38 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:53:02 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	check_walls(t_game *game)
 	while (i < width)
 	{
 		if (game->map.map[0][i] != '1' || game->map.map[height - 1][i] != '1')
-			error_output(wall_error, game);
+			cleanup_and_exit(game, wall_error, 0);
 		i++;
 	}
 	i = 1;
 	while (i < height - 1)
 	{
 		if (game->map.map[i][0] != '1' || game->map.map[i][width - 1] != '1')
-			error_output(wall_error, game);
+			cleanup_and_exit(game, wall_error, 0);
 		i++;
 	}
 	return (1);
@@ -47,7 +47,7 @@ int	check_rectangular(t_game *game)
 	while (game->map.map[i])
 	{
 		if ((int)ft_strlen(game->map.map[i]) != game->map.columns)
-			error_output("Error\nMap must be rectangular.\n", game);
+			cleanup_and_exit(game, "Error\nMap must be rectangular.\n", 0);
 		i++;
 	}
 	return (1);

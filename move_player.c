@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:41:56 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 22:14:28 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:07:10 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,11 @@ int	handle_key(int key, t_game *game)
 	new_x = game->position_x;
 	new_y = game->position_y;
 	if (game->win_state == 1)
-	{
-		ft_putstr_fd("Congratulations, you won!\n", 1);
-		cleanup_and_exit(game, 0);
-	}
+		cleanup_and_exit(game, "Congratulations, you won!\n", 0);
 	new_x = game->position_x;
 	new_y = game->position_y;
 	if (key == 65307)
-		cleanup_and_exit(game, 1);
+		cleanup_and_exit(game, "You quit the game.\n", 1);
 	else if (key == 119 || key == 65362)
 		new_y -= 1;
 	else if (key == 97 || key == 65361)

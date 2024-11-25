@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 22:14:53 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:05:22 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,15 @@ Libft authorized: Yes
 */
 
 /*TODO:
-X press on window to quit the game >>>>>>>>>>>>>>>>>> check leaks when closing game or pressing ESC
-
-make Exit walkable
-swap Exit with X when player is on the exit but not all collectibles are collected and create sprite of player on top of closede door
-
-sprite for player on open door at end of game; show that sprite when exit
-
-use make to switch characters: https://www.youtube.com/watch?v=zaKGzGfHjAQ
-
-implement function to read the screen size and resize the map if needed
 
 use of sprites to display the digits of the score in the window
 
 when the player is facing a wall and you press a key L/R to turn, the sprite change turn imediatly, even if the character is not moving, and not after the next move.
 
-when the 'game over', the player is always facing right, no matter what the last key L/R was
-
-TEST:
 
 */
 
 #include "so_long.h"
-
-
 
 void start_game(t_game *game)
 {
@@ -87,7 +72,7 @@ void start_game(t_game *game)
 	game->wall_y = NULL;
 	game->image = NULL;
 	game->addr = NULL;
-	game->last_direction = '\0';
+	game->last_direction = '\0'; // if player is on the left of the map, load R, otherwise, load L
 	game->win_state = 0;
 
 	// Initialize MinilibX connection and window pointers
@@ -95,25 +80,19 @@ void start_game(t_game *game)
 	game->minilibx.window_mlx = NULL;
 }
 
-
-#include "mlx.h"
-
-// Function to handle the close event
-int	close_window(t_game *game)
+int	exit_game(t_game *game)
 {
-	error_output("", game); // Make sure to free any allocated memory and clean up resources
-	exit(1); // Exit the program
-	return (0);
+    cleanup_and_exit(game, "You quit the game.\n", 1);
+    return 0; // This return statement is necessary to satisfy the function signature
 }
 
 // Updated hooks function
 void	hooks(t_game *game)
 {
 	mlx_hook(game->minilibx.window_mlx, 2, 1L << 0, handle_key, game); // Key press
-	mlx_hook(game->minilibx.window_mlx, 17, 0, close_window, game); // Close window (DestroyNotify)
+	mlx_hook(game->minilibx.window_mlx, 17, 0, &exit_game, game); // Close window (DestroyNotify)
 	mlx_loop(game->minilibx.connect_mlx);
 }
-
 
 
 int	main(int argc, char **argv)
