@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:22:03 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 12:14:24 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:14:08 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ int	extension_check(int argc, char **argv, t_game *game)
 	return (0);
 }
 
+void	invalid_read(t_game *game, int count)
+{
+	free(game->map.buffer);
+	close(game->map.map_read_fd);
+	if (count == 0)
+		cleanup_and_exit(game, "Error\nEmpty map.\n", 42);
+	else
+		cleanup_and_exit(game, "Error\nFailed to read map file.\n", 42);
+}
+
 int	map_checker(char *argv, t_game *game)
 {
 	int	count;
@@ -34,19 +44,15 @@ int	map_checker(char *argv, t_game *game)
 		cleanup_and_exit(game, "Memory allocation failed for buffer.\n", 42);
 	game->map.map_read_fd = open(argv, O_RDONLY);
 	if (game->map.map_read_fd == -1)
-		cleanup_and_exit(game, "Failed to open map file.\n", 42);
+		cleanup_and_exit(game, "Error\nFailed to open map file.\n", 42);
 	count = read(game->map.map_read_fd, game->map.buffer, BUFFER_SIZE);
-	if (count == -1)
-	{
-		free(game->map.buffer);
-		close(game->map.map_read_fd);
-		cleanup_and_exit(game, "Failed to read map file.\n", 42);
-	}
+	if (count < 1)
+		invalid_read(game, count);
 	close(game->map.map_read_fd);
 	game->map.buffer[count] = '\0';
 	game->map.map = ft_split(game, '\n');
 	if (!game->map.map)
-		cleanup_and_exit(game, "Failed to split map into lines.\n", 42);
+		cleanup_and_exit(game, "Error\nFailed to split map into lines.\n", 42);
 	free(game->map.buffer);
 	if (!player_count(game) || !check_rectangular(game) || !check_walls(game)
 		|| !check_valid_path(game))

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 12:30:47 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:13:29 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,7 @@ Libft authorized: Yes
 */
 
 /*TODO:
-
-seg fault when player is looking at one direction and we press the opposite
-button and quit the game without the player moving and sprite changinging
-
 use of sprites to display the digits of the score in the window
-
-if the player is facing a wall and you press a key L/R to turn, the sprite change
-turn imediatly, even if the character is not moving, and not after the next move.
 
 
 */

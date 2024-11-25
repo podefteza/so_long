@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 12:24:21 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:55:26 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,10 @@ typedef struct s_game
 	char		last_direction;
 	int			win_state;
 }				t_game;
+
+// END GAME
+void			win_message(t_game *game, t_center *center);
+void			check_win(t_game *game);
 
 // EXIT
 void			free_collectibles(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:05:18 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/22 17:35:56 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:56:55 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,4 @@ void	refresh_dynamic_elements(t_game *game)
 	mlx_put_image_to_window(game->minilibx.connect_mlx,
 		game->minilibx.window_mlx, game->sprites.player, SPRITE_SIZE
 		* game->position_x, SPRITE_SIZE * game->position_y);
-	ft_putstr_fd("Movements: ", 2);
-	ft_putnbr_fd(game->movements, 2);
-	ft_putstr_fd("\n", 2);
 }

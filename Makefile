@@ -6,7 +6,7 @@
 #    By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 09:29:40 by carlos-j          #+#    #+#              #
-#    Updated: 2024/11/21 10:28:38 by carlos-j         ###   ########.fr        #
+#    Updated: 2024/11/25 15:55:00 by carlos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,11 @@ SRCS = so_long.c \
 		game_setup.c \
 		move_player.c \
 		file_checker.c \
-		error.c \
 		scan_map.c \
 		flood_fill.c \
 		exit.c \
+		check_win.c \
+		destroy_sprites.c \
 		map_content_checker.c \
 		map_objects_count.c \
 		libft/ft_putnbr_fd.c \
