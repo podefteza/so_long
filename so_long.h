@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 15:55:26 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:01:15 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ typedef struct s_center
 	int			message_y;
 }				t_center;
 
+typedef struct s_position
+{
+	int	x;
+	int	y;
+}	t_position;
+
 typedef struct s_game
 {
 	t_minilibx	minilibx;
@@ -146,7 +152,7 @@ void			count_collectibles(t_game *game);
 void			count_walls(t_game *game);
 
 // FLOOD FILL HELPER FUNCTIONS
-void			reset_collectibles(t_game *game);
+void			reset_map(t_game *game);
 void			init_directions(int directions[4][2]);
 void			process_cell(t_game *game, int x, int y, t_flood_fill *state);
 void			explore_neighbors(t_game *game, int x, int y,

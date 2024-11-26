@@ -6,25 +6,25 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:50:19 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 12:11:06 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:10:56 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	update_counts(t_game *game, char c, int x, int y, int *counts)
+void	update_counts(t_game *game, char c, t_position position, int *counts)
 {
 	if (c == 'P')
 	{
 		counts[0]++;
-		game->position_x = x;
-		game->position_y = y;
+		game->position_x = position.x;
+		game->position_y = position.y;
 	}
 	else if (c == 'E')
 	{
 		counts[1]++;
-		game->exit_x = x;
-		game->exit_y = y;
+		game->exit_x = position.x;
+		game->exit_y = position.y;
 	}
 	else if (c == 'C')
 		counts[2]++;
@@ -32,16 +32,19 @@ void	update_counts(t_game *game, char c, int x, int y, int *counts)
 
 int	player_count(t_game *game)
 {
-	int	i;
-	int	j;
+	t_position	position;
+	int			counts[3];
 
-	i = -1;
-	int counts[3] = {0, 0, 0};
-	while (game->map.map[++i])
+	counts[0] = 0;
+	counts[1] = 0;
+	counts[2] = 0;
+	position.x = -1;
+	while (game->map.map[++position.x])
 	{
-		j = -1;
-		while (game->map.map[i][++j])
-			update_counts(game, game->map.map[i][j], i, j, counts);
+		position.y = -1;
+		while (game->map.map[position.x][++position.y])
+			update_counts(game, game->map.map[position.x][position.y], position,
+				counts);
 	}
 	if (counts[0] != 1 || counts[1] != 1 || counts[2] < 1)
 	{

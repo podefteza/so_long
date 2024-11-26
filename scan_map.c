@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 08:58:46 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/21 09:01:26 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:58:18 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,66 @@ void	process_wall(t_game *game, int x, int y, int *nr_walls)
 	(*nr_walls)++;
 }
 
-void	scan_map(t_game *game)
+int validate_map_characters(t_game *game)
 {
-	int		l;
-	int		c;
-	int		nr_collectibles;
-	int		nr_walls;
-	char	cell;
+	int row;
+	int col;
 
-	l = -1;
-	nr_collectibles = 0;
-	nr_walls = 0;
-	while (game->map.map[++l])
+	row = 0;
+	while (game->map.map[row])
 	{
-		c = -1;
-		while (game->map.map[l][++c])
+		col = 0;
+		while (game->map.map[row][col])
 		{
-			cell = game->map.map[l][c];
+			char cell = game->map.map[row][col];
+			// Check for invalid characters
+			if (cell != 'E' && cell != 'C' && cell != 'P' &&
+				cell != '1' && cell != '0' && cell != '\n')
+				{
+					printf("Validating character: %c\n", game->map.map[row][col]);
+					return (0);
+				}
+
+			// Check for invalid spaces
+			if (cell == ' ')
+				return (0);
+			// Check for consecutive '\n' or a '\n' at the end
+			if (cell == '\n' && (!game->map.map[row + 1] || game->map.map[row + 1][0] == '\n'))
+				return (0);
+			col++;
+		}
+		row++;
+	}
+	return (1); // Valid map
+}
+
+void scan_map(t_game *game)
+{
+	int		row;
+	int		col;
+	int		nr_collectibles = 0;
+	int		nr_walls = 0;
+
+	if (!validate_map_characters(game))
+		cleanup_and_exit(game, "Error\nInvalid map format.\n", 1);
+
+	row = -1;
+	while (game->map.map[++row])
+	{
+		col = -1;
+		while (game->map.map[row][++col])
+		{
+			char cell = game->map.map[row][col];
 			if (cell == 'P')
-				process_player(game, c, l);
+				process_player(game, col, row);
 			else if (cell == 'E')
-				process_exit(game, c, l);
+				process_exit(game, col, row);
 			else if (cell == 'C')
-				process_collectible(game, c, l, &nr_collectibles);
+				process_collectible(game, col, row, &nr_collectibles);
 			else if (cell == '1')
-				process_wall(game, c, l, &nr_walls);
+				process_wall(game, col, row, &nr_walls);
 		}
 	}
 }
+
+

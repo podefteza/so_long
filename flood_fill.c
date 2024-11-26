@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:14:28 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/21 09:21:19 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:59:47 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_reachable(t_game *game, int x, int y)
 			|| game->map.map[x][y] == 'E') && game->map.map[x] != NULL);
 }
 
-void	reset_collectibles(t_game *game)
+void	reset_map(t_game *game)
 {
 	int	l;
 	int	c;
@@ -29,8 +29,12 @@ void	reset_collectibles(t_game *game)
 	{
 		c = -1;
 		while (game->map.map[l][++c])
+		{
 			if (game->map.map[l][c] == '#')
 				game->map.map[l][c] = 'C';
+			else if (game->map.map[l][c] == '*')
+				game->map.map[l][c] = '0';
+		}
 	}
 }
 
