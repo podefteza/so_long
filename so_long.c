@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 16:13:29 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:00:15 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Libft authorized: Yes
 */
 
 /*TODO:
-use of sprites to display the digits of the score in the window
+create sprites for score up to 999
 
 
 */
@@ -47,6 +47,47 @@ void	default_values(t_game *game)
 	game->win_state = 0;
 	game->minilibx.connect_mlx = NULL;
 	game->minilibx.window_mlx = NULL;
+}
+
+void	default_score_left_center(t_game *game)
+{
+	game->score.left_0 = NULL;
+	game->score.left_1 = NULL;
+	game->score.left_2 = NULL;
+	game->score.left_3 = NULL;
+	game->score.left_4 = NULL;
+	game->score.left_5 = NULL;
+	game->score.left_6 = NULL;
+	game->score.left_7 = NULL;
+	game->score.left_8 = NULL;
+	game->score.left_9 = NULL;
+	game->score.center_0 = NULL;
+	game->score.center_1 = NULL;
+	game->score.center_2 = NULL;
+	game->score.center_3 = NULL;
+	game->score.center_4 = NULL;
+	game->score.center_5 = NULL;
+	game->score.center_6 = NULL;
+	game->score.center_7 = NULL;
+	game->score.center_8 = NULL;
+	game->score.center_9 = NULL;
+}
+
+void	default_score_left_default(t_game *game)
+{
+	game->score.right_0 = NULL;
+	game->score.right_1 = NULL;
+	game->score.right_2 = NULL;
+	game->score.right_3 = NULL;
+	game->score.right_4 = NULL;
+	game->score.right_5 = NULL;
+	game->score.right_6 = NULL;
+	game->score.right_7 = NULL;
+	game->score.right_8 = NULL;
+	game->score.right_9 = NULL;
+	game->score.score_left = NULL;
+	game->score.score_center = NULL;
+	game->score.score_right = NULL;
 }
 
 void	default_sprites(t_game *game)

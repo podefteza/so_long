@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 12:24:27 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:52:48 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	cleanup_and_exit(t_game *game, char *message, int exit_code)
 	{
 		free_player_sprites(game, exit_code);
 		free_map_sprites(game, exit_code);
+		free_score_left(game);
+		free_score_center(game);
+		free_score_right(game);
 	}
 	if (game->minilibx.connect_mlx)
 	{

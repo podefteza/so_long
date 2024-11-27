@@ -6,7 +6,7 @@
 #    By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 09:29:40 by carlos-j          #+#    #+#              #
-#    Updated: 2024/11/25 15:55:00 by carlos-j         ###   ########.fr        #
+#    Updated: 2024/11/26 14:15:35 by carlos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ MINILIBXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
 
 SRCS = so_long.c \
 		validation.c \
+		process_map_objects.c \
 		load_sprites.c \
         load_exit.c \
 		load_static_elements.c \
