@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 12:00:15 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:47:10 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ Libft authorized: Yes
 */
 
 /*TODO:
-create sprites for score up to 999
+initialize all sprites to NULL, free them all on exit;
+
+check data races?
+check sanitize?
 
 
 */
@@ -115,13 +118,15 @@ void	default_sprites(t_game *game)
 
 int	exit_game(t_game *game)
 {
+	if (game->win_state == 1)
+		cleanup_and_exit(game, "Congratulations, you won!\n", 0);
 	cleanup_and_exit(game, "Error\nYou quit the game.\n", 1);
 	return (0);
 }
 
 void	hooks(t_game *game)
 {
-	mlx_hook(game->minilibx.window_mlx, 2, 1L << 0, handle_key, game);
+	mlx_hook(game->minilibx.window_mlx, 2, 1, handle_key, game);
 	mlx_hook(game->minilibx.window_mlx, 17, 0, &exit_game, game);
 	mlx_loop(game->minilibx.connect_mlx);
 }
