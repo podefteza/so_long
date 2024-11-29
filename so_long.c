@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/28 11:47:10 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:45:34 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,23 @@ initialize all sprites to NULL, free them all on exit;
 check data races?
 check sanitize?
 
+map with empty line at the end
+
+map from a non existetent file >>>> 1  block leaks
+
+change sprite of game over with enemy to wall on background
+
+1 block with leaks when quiting after game won
+
+move count increases when you press a dead key
+
 
 */
 
 #include "so_long.h"
 
+
+// MOVE DEFAULTS TO ANOTHER FILE...
 void	default_values(t_game *game)
 {
 	game->movements = 0;
@@ -45,6 +57,9 @@ void	default_values(t_game *game)
 	game->wall_x = NULL;
 	game->wall_y = NULL;
 	game->image = NULL;
+	game->nr_enemies = 0;
+	game->enemy_x = NULL;
+	game->enemy_y = NULL;
 	game->addr = NULL;
 	game->last_direction = '\0';
 	game->win_state = 0;

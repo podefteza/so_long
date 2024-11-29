@@ -6,7 +6,7 @@
 #    By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 09:29:40 by carlos-j          #+#    #+#              #
-#    Updated: 2024/11/26 14:15:35 by carlos-j         ###   ########.fr        #
+#    Updated: 2024/11/28 12:07:17 by carlos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ SRCS = so_long.c \
 		libft/ft_substr.c \
 		libft/ft_strdup.c \
 		libft/ft_split.c \
-		libft/ft_itoa.c
 
 OBJS = ${SRCS:.c=.o}
 

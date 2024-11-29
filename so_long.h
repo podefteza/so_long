@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 12:08:55 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:41:10 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 # define WIN1 "sprites/win1.xpm"
 # define WIN2 "sprites/win2.xpm"
 # define WIN3 "sprites/win3.xpm"
+# define GAME_OVER1 "sprites/game_over1.xpm"
+# define GAME_OVER2 "sprites/game_over2.xpm"
+# define GAME_OVER3 "sprites/game_over3.xpm"
 
 # define C_DOOR_SPRITE "sprites/closed_door.xpm"
 # define O_DOOR_SPRITE "sprites/open_door.xpm"
@@ -45,6 +48,9 @@
 # define P_R_C_DOOR_SPRITE "sprites/player_right_closed_door.xpm"
 # define P_L_O_DOOR_SPRITE "sprites/player_left_win.xpm"
 # define P_R_O_DOOR_SPRITE "sprites/player_right_win.xpm"
+# define ENEMY_SPRITE "sprites/enemy.xpm"
+# define E_R_P_L_SPRITE "sprites/e_r_p_l.xpm"
+# define E_R_P_R_SPRITE "sprites/e_r_p_r.xpm"
 
 # define LEFT_0 "sprites/score/left/0.xpm"
 # define LEFT_1 "sprites/score/left/1.xpm"
@@ -148,15 +154,21 @@ typedef struct s_sprites
 	void		*p_right;
 	void		*p_l_c_door;
 	void		*p_r_c_door;
-	void		*p_l_o_door;
-	void		*p_r_o_door;
+	//void		*p_l_o_door;
+	//void		*p_r_o_door;
 	void		*collect;
 	void		*win1;
 	void		*win2;
 	void		*win3;
+	void		*game_over1;
+	void		*game_over2;
+	void		*game_over3;
 	void		*exit;
 	void		*ex_closed;
 	void		*exit_open;
+	void		*enemy;
+	void		*e_r_p_l;
+	void		*e_r_p_r;
 }				t_sprites;
 
 typedef struct s_center
@@ -183,6 +195,7 @@ typedef struct s_game
 	t_sprites	sprites;
 	t_map		map;
 	t_score		score;
+	t_center	center;
 
 	int			movements;
 	int			position_x;
@@ -197,6 +210,9 @@ typedef struct s_game
 	int			nr_walls;
 	int			*wall_x;
 	int			*wall_y;
+	int			nr_enemies;
+	int			*enemy_x;
+	int			*enemy_y;
 	void		*image;
 	char		*addr;
 	char		last_direction;
@@ -209,11 +225,13 @@ void			process_exit(t_game *game, int x, int y);
 void			process_collectible(t_game *game, int x, int y,
 					int *nr_collectibles);
 void			process_wall(t_game *game, int x, int y, int *nr_walls);
-void			process_map(t_game *game, int nr_collectibles, int nr_walls);
+void			process_map(t_game *game, int nr_collectibles, int nr_walls,
+					int nr_enemies);
 
 // END GAME
 void			win_message(t_game *game, t_center *center);
 void			check_win(t_game *game);
+int				game_over(t_game *game, int new_x, int new_y);
 
 // EXIT
 void			free_collectibles(t_game *game);
@@ -225,6 +243,7 @@ void			free_map_sprites(t_game *game, int exit_code);
 void			free_score_left(t_game *game);
 void			free_score_center(t_game *game);
 void			free_score_right(t_game *game);
+void	free_game_over_sprites(t_game *game, int exit_code);
 
 // MAP OBJECTS COUNT
 int				player_count(t_game *game);
@@ -255,6 +274,7 @@ int				check_valid_path(t_game *game);
 int				check_rectangular(t_game *game);
 void			count_collectibles(t_game *game);
 void			count_walls(t_game *game);
+void			count_enemies(t_game *game);
 
 // SCAN MAP
 void			scan_map(t_game *game);
@@ -290,6 +310,5 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strdup(const char *s);
 char			**ft_split(t_game *game, char c);
-char			*ft_itoa(int n);
 
 #endif

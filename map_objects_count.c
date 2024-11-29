@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:50:19 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/26 14:10:56 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 01:02:33 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	player_count(t_game *game)
 	counts[0] = 0;
 	counts[1] = 0;
 	counts[2] = 0;
+
 	position.x = -1;
 	while (game->map.map[++position.x])
 	{
@@ -95,6 +96,29 @@ void	count_walls(t_game *game)
 	game->wall_x = malloc(game->nr_walls * sizeof(int));
 	game->wall_y = malloc(game->nr_walls * sizeof(int));
 	if (!game->wall_x || !game->wall_y)
+	{
+		perror("Memory allocation failed");
+		exit(1);
+	}
+}
+
+void	count_enemies(t_game *game)
+{
+	int	l;
+	int	c;
+
+	l = -1;
+	game->nr_enemies = 0;
+	while (game->map.map[++l])
+	{
+		c = -1;
+		while (game->map.map[l][++c])
+			if (game->map.map[l][c] == 'X')
+				game->nr_enemies++;
+	}
+	game->enemy_x = malloc(game->nr_enemies * sizeof(int));
+	game->enemy_y = malloc(game->nr_enemies * sizeof(int));
+	if (!game->enemy_x || !game->enemy_y)
 	{
 		perror("Memory allocation failed");
 		exit(1);

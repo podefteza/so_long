@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 11:52:48 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:23:44 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,37 @@ void	free_map(t_game *game)
 	}
 }
 
+void	free_enemies(t_game *game)
+{
+	if (game->enemy_x)
+	{
+		free(game->enemy_x);
+		game->enemy_x = NULL;
+	}
+	if (game->enemy_y)
+	{
+		free(game->enemy_y);
+		game->enemy_y = NULL;
+	}
+}
+
 int	cleanup_and_exit(t_game *game, char *message, int exit_code)
 {
 	ft_putstr_fd(message, 2);
 	free_collectibles(game);
 	free_walls(game);
 	free_map(game);
+	free_enemies(game);
 	if (game->image)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->image);
 	if (game->minilibx.window_mlx)
 		mlx_destroy_window(game->minilibx.connect_mlx,
 			game->minilibx.window_mlx);
+	// non-existing file??
+	free_game_over_sprites(game, exit_code);
 	if (exit_code != 42)
 	{
+		//if (exit_code != 33)
 		free_player_sprites(game, exit_code);
 		free_map_sprites(game, exit_code);
 		free_score_left(game);

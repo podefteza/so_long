@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:33:01 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 11:41:40 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:56:43 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	game_setup(t_game *game, int img_size)
 	load_score_center(game, img_size);
 	load_score_right(game, img_size);
 	player_sprites(game, img_size);
+	count_enemies(game);
 	count_walls(game);
 	scan_map(game);
 	load_static_elements(game);

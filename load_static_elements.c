@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:44:35 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 11:25:00 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:05:59 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,27 @@ void	draw_collectibles(t_game *game)
 	}
 }
 
+void	draw_enemies(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->nr_enemies)
+	{
+		mlx_put_image_to_window(game->minilibx.connect_mlx,
+			game->minilibx.window_mlx, game->sprites.enemy, SPRITE_SIZE
+			* game->enemy_x[i], SPRITE_SIZE * game->enemy_y[i]);
+		i++;
+	}
+}
+
 void	load_static_elements(t_game *game)
 {
 	draw_background(game);
 	draw_walls(game);
 	draw_collectibles(game);
 	draw_exit(game);
+	draw_enemies(game);
 	game->score.score_left = game->score.left_0;
 	game->score.score_center = game->score.center_0;
 	game->score.score_right = game->score.right_0;

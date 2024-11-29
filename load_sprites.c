@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:17:54 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 12:08:55 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:10:24 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	player_sprites(t_game *game, int img_size)
 			P_L_C_DOOR_SPRITE, &img_size, &img_size);
 	game->sprites.p_r_c_door = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			P_R_C_DOOR_SPRITE, &img_size, &img_size);
+	game->sprites.enemy = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
+			ENEMY_SPRITE, &img_size, &img_size);
 }
 
 void	load_sprites(t_game *game, int img_size)
@@ -115,5 +117,11 @@ void	load_sprites(t_game *game, int img_size)
 	game->sprites.win2 = mlx_xpm_file_to_image(game->minilibx.connect_mlx, WIN2,
 			&img_size, &img_size);
 	game->sprites.win3 = mlx_xpm_file_to_image(game->minilibx.connect_mlx, WIN3,
+			&img_size, &img_size);
+	game->sprites.game_over1 = mlx_xpm_file_to_image(game->minilibx.connect_mlx, GAME_OVER1,
+			&img_size, &img_size);
+	game->sprites.game_over2 = mlx_xpm_file_to_image(game->minilibx.connect_mlx, GAME_OVER2,
+			&img_size, &img_size);
+	game->sprites.game_over3 = mlx_xpm_file_to_image(game->minilibx.connect_mlx, GAME_OVER3,
 			&img_size, &img_size);
 }

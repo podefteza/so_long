@@ -6,13 +6,25 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:21:04 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/27 12:05:10 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:18:25 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// if anything breaks, make them NULL pointers after destroy
+void	free_game_over_sprites(t_game *game, int exit_code)
+{
+	if (game->sprites.enemy)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.enemy);
+	if (game->sprites.game_over1)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.game_over1);
+	if (game->sprites.game_over2)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.game_over2);
+	if (game->sprites.game_over3)
+		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.game_over3);
+	(void)exit_code;
+}
+
 void	free_player_sprites(t_game *game, int exit_code)
 {
 	if (game->sprites.player)
@@ -21,12 +33,12 @@ void	free_player_sprites(t_game *game, int exit_code)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_l_c_door);
 	if (game->sprites.p_r_c_door)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_r_c_door);
-	if (game->sprites.p_left && exit_code == 1 && ((game->last_direction == 'R')
+	if (game->sprites.p_left && ((game->last_direction == 'R')
 			|| !game->last_direction))
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_left);
-	if (game->sprites.p_right && exit_code == 1
-		&& (game->last_direction == 'L'))
+	if (game->sprites.p_right && (game->last_direction == 'L'))
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.p_right);
+	(void)exit_code;
 }
 
 void	free_map_sprites(t_game *game, int exit_code)
@@ -43,18 +55,16 @@ void	free_map_sprites(t_game *game, int exit_code)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.collect);
 	if (game->sprites.ex_closed)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.ex_closed);
-	if (game->sprites.exit && exit_code == 0)
+	if (game->sprites.exit && (exit_code == 0))
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit);
-	if (game->sprites.wall && exit_code == 1)
+	if (game->sprites.wall && (exit_code == 1 || exit_code == 33))
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.wall);
-	if (game->sprites.exit_open && exit_code == 1)
+	if (game->sprites.exit_open && (exit_code == 1 || exit_code == 33))
 		mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.exit_open);
 }
 
 void	free_score_left(t_game *game)
 {
-	//if (game->score.score_left)
-	//	mlx_destroy_image(game->minilibx.connect_mlx, game->score.score_left);
 	if (game->score.left_0)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.left_0);
 	if (game->score.left_1)
@@ -75,14 +85,10 @@ void	free_score_left(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.left_8);
 	if (game->score.left_9)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.left_9);
-	//if (game->score.score_left)
-	//	mlx_destroy_image(game->minilibx.connect_mlx, game->score.score_left);
 }
 
 void	free_score_center(t_game *game)
 {
-	//if (game->score.score_center)
-	//	mlx_destroy_image(game->minilibx.connect_mlx, game->score.score_center);
 	if (game->score.center_0)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.center_0);
 	if (game->score.center_1)
@@ -103,14 +109,10 @@ void	free_score_center(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.center_8);
 	if (game->score.center_9)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.center_9);
-	//if (game->score.score_center)
-	//	mlx_destroy_image(game->minilibx.connect_mlx, game->score.score_center);
 }
 
 void	free_score_right(t_game *game)
 {
-	//if (game->score.score_right)
-	//	mlx_destroy_image(game->minilibx.connect_mlx, game->score.score_right);
 	if (game->score.right_0)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.right_0);
 	if (game->score.right_1)
@@ -131,6 +133,4 @@ void	free_score_right(t_game *game)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.right_8);
 	if (game->score.right_9)
 		mlx_destroy_image(game->minilibx.connect_mlx, game->score.right_9);
-	//if (game->score.score_right)
-	//	mlx_destroy_image(game->minilibx.connect_mlx, game->score.score_right);
 }
