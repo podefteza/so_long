@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:14:28 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/26 13:59:47 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:49:47 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	is_reachable(t_game *game, int x, int y)
 {
-	return (x >= 0 && x < game->map.lines && y >= 0 && y < game->map.columns
-		&& (game->map.map[x][y] == '0' || game->map.map[x][y] == 'C'
-			|| game->map.map[x][y] == 'E') && game->map.map[x] != NULL);
+	if (x >= 0 && x < game->map.lines && y >= 0 && y < game->map.columns)
+		if (game->map.map[x][y] == '0' || game->map.map[x][y] == 'C'
+			|| game->map.map[x][y] == 'E')
+			return (game->map.map[x] != NULL);
+	return (0);
 }
 
 void	reset_map(t_game *game)

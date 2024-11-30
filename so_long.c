@@ -6,17 +6,9 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/30 14:45:09 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:24:58 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*TODO:
-check if all used functions are ok!
-map with empty line at the end + empty line in middle
-
-
-
-*/
 
 #include "so_long.h"
 
