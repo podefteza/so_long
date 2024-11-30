@@ -6,7 +6,7 @@
 #    By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 09:29:40 by carlos-j          #+#    #+#              #
-#    Updated: 2024/11/28 12:07:17 by carlos-j         ###   ########.fr        #
+#    Updated: 2024/11/30 15:18:17 by carlos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,29 +15,35 @@ CC = cc -Wall -Wextra -Werror
 MINILIBXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
 
 SRCS = so_long.c \
-		validation.c \
-		process_map_objects.c \
-		load_sprites.c \
-        load_exit.c \
-		load_static_elements.c \
-		refresh_dynamic_elements.c \
-		game_setup.c \
-		move_player.c \
-		file_checker.c \
-		scan_map.c \
-		flood_fill.c \
-		exit.c \
-		check_win.c \
-		destroy_sprites.c \
-		map_content_checker.c \
-		map_objects_count.c \
+		game/check_win.c \
+		game/file_checker.c \
+		game/load_exit.c \
+		game/map_objects_count.c \
+		game/scan_map.c \
+		game/default_variables.c \
+		game/flood_fill.c \
+		game/load_score_sprites.c \
+		game/move_player.c \
+		game/validation.c \
+		game/destroy_score_sprites.c \
+		game/free_map_characters.c \
+		game/load_sprites.c \
+		game/process_map.c \
+		game/destroy_sprites.c \
+		game/game_over.c \
+		game/load_static_elements.c \
+		game/process_map_objects.c \
+		game/exit.c \
+		game/game_setup.c \
+		game/map_content_checker.c \
+		game/refresh_dynamic_elements.c \
 		libft/ft_putnbr_fd.c \
 		libft/ft_putstr_fd.c \
+		libft/ft_split.c \
+		libft/ft_strdup.c \
 		libft/ft_strlen.c \
 		libft/ft_strncmp.c \
-		libft/ft_substr.c \
-		libft/ft_strdup.c \
-		libft/ft_split.c \
+		libft/ft_substr.c
 
 OBJS = ${SRCS:.c=.o}
 

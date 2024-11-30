@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:13:52 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/30 12:30:00 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:18:21 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,6 @@ typedef struct s_flood_fill
 	int			exit_reached;
 }				t_flood_fill;
 
-typedef struct s_minilibx
-{
-	void		*connect_mlx;
-	void		*window_mlx;
-}				t_minilibx;
-
 typedef struct s_map
 {
 	char		**map;
@@ -154,8 +148,6 @@ typedef struct s_sprites
 	void		*p_right;
 	void		*p_l_c_door;
 	void		*p_r_c_door;
-	//void		*p_l_o_door;
-	//void		*p_r_o_door;
 	void		*collect;
 	void		*win1;
 	void		*win2;
@@ -189,6 +181,12 @@ typedef struct s_position
 	int			y;
 }				t_position;
 
+typedef struct s_minilibx
+{
+	void		*connect_mlx;
+	void		*window_mlx;
+}				t_minilibx;
+
 typedef struct s_game
 {
 	t_minilibx	minilibx;
@@ -219,96 +217,74 @@ typedef struct s_game
 	int			win_state;
 }				t_game;
 
-// PROCESS MAP
-void			process_player(t_game *game, int x, int y);
-void			process_exit(t_game *game, int x, int y);
-void			process_collectible(t_game *game, int x, int y,
-					int *nr_collectibles);
-void			process_wall(t_game *game, int x, int y, int *nr_walls);
-void			process_map(t_game *game, int nr_collectibles, int nr_walls,
-					int nr_enemies);
-
-// END GAME
-void			win_message(t_game *game, t_center *center);
-void			check_win(t_game *game);
-int				game_over(t_game *game, int new_x, int new_y);
-
-// EXIT
-void			free_collectibles(t_game *game);
-void			free_walls(t_game *game);
-void			free_map(t_game *game);
-int				cleanup_and_exit(t_game *game, char *error, int exit_code);
-void			free_player_sprites(t_game *game, int exit_code);
-void			free_map_sprites(t_game *game, int exit_code);
-void			free_score_left(t_game *game);
-void			free_score_center(t_game *game);
-void			free_score_right(t_game *game);
-void	free_game_over_sprites(t_game *game, int exit_code);
-
-// MAP OBJECTS COUNT
-int				player_count(t_game *game);
+// MAP CHECKER
+int				check_rectangular(t_game *game);
+int				check_valid_path(t_game *game);
+int				check_walls(t_game *game);
 void			count_collectibles(t_game *game);
+void			count_enemies(t_game *game);
 void			count_walls(t_game *game);
-
-// FLOOD FILL HELPER FUNCTIONS
-void			reset_map(t_game *game);
-void			init_directions(int directions[4][2]);
-void			process_cell(t_game *game, int x, int y, t_flood_fill *state);
 void			explore_neighbors(t_game *game, int x, int y,
 					t_flood_fill *state);
-
-// VALIDATION
-void			flood_fill(t_game *game, int x, int y, t_flood_fill *state);
-
 int				extension_check(int argc, char **argv, t_game *game);
+void			flood_fill(t_game *game, int x, int y, t_flood_fill *state);
+void			init_directions(int directions[4][2]);
 int				map_checker(char *argv, t_game *game);
-void			count_collectibles(t_game *game);
-void			count_walls(t_game *game);
+void			process_cell(t_game *game, int x, int y, t_flood_fill *state);
+void			process_collectible(t_game *game, int x, int y,
+					int *nr_collectibles);
+void			process_enemy(t_game *game, int x, int y, int *nr_enemies);
+void			process_exit(t_game *game, int x, int y);
+void			process_map(t_game *game, int nr_collectibles, int nr_walls,
+					int nr_enemies);
+void			process_player(t_game *game, int x, int y);
+void			process_wall(t_game *game, int x, int y, int *nr_walls);
+void			reset_map(t_game *game);
 void			scan_map(t_game *game);
 int				player_count(t_game *game);
-int				check_rectangular(t_game *game);
-int				check_walls(t_game *game);
-int				check_valid_path(t_game *game);
+int				validate_map_characters(t_game *game);
 
-// MAP CONTENT CHECKER
-int				check_rectangular(t_game *game);
-void			count_collectibles(t_game *game);
-void			count_walls(t_game *game);
-void			count_enemies(t_game *game);
-
-// SCAN MAP
-void			scan_map(t_game *game);
-
-// ERROR
-void			free_map(t_game *game);
-
-// LOAD AND REFRESH SPRITES
-void			refresh_score_left(t_game *game);
-void			refresh_score_center(t_game *game);
-void			refresh_score_right(t_game *game);
-void			load_score_left(t_game *game, int img_size);
-void			load_score_center(t_game *game, int img_size);
-void			load_score_right(t_game *game, int img_size);
-void			player_sprites(t_game *game, int img_size);
-void			load_sprites(t_game *game, int img_size);
-void			refresh_dynamic_elements(t_game *game);
-void			draw_exit(t_game *game);
+// GAME SETUP
+void			defaults(t_game *game);
 void			draw_background(t_game *game);
-void			load_static_elements(t_game *game);
-
-// GAME_SETUP
+void			draw_exit(t_game *game);
 void			game_setup(t_game *game, int img_size);
-
-// MOVE_PLAYER
 int				handle_key(int key, t_game *game);
+void			load_score_center(t_game *game, int img_size);
+void			load_score_left(t_game *game, int img_size);
+void			load_score_right(t_game *game, int img_size);
+void			load_sprites(t_game *game, int img_size);
+void			load_static_elements(t_game *game);
+void			player_sprites(t_game *game, int img_size);
+void			refresh_dynamic_elements(t_game *game);
+void			refresh_score_center(t_game *game);
+void			refresh_score_left(t_game *game);
+void			refresh_score_right(t_game *game);
+
+// EXIT
+void			check_win(t_game *game);
+int				cleanup_and_exit(t_game *game, char *error, int exit_code);
+void			free_collectibles(t_game *game);
+void			free_game_over_sprites(t_game *game, int exit_code);
+void			free_map(t_game *game);
+void			free_map_characters(t_game *game);
+void			free_map_sprites(t_game *game, int exit_code);
+void			free_player_sprites(t_game *game, int exit_code);
+void			free_score_center(t_game *game);
+void			free_score_left(t_game *game);
+void			free_score_right(t_game *game);
+void			free_walls(t_game *game);
+int				game_over(t_game *game, int new_x, int new_y);
+void			game_over_message(t_game *game);
+void			win_message(t_game *game, t_center *center);
 
 // LIBFT
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_fd(char *s, int fd);
+char			**ft_split(t_game *game, char c);
+char			*ft_strdup(const char *s);
 size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*ft_strdup(const char *s);
-char			**ft_split(t_game *game, char c);
 
 #endif

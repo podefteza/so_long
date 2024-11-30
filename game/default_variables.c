@@ -1,41 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   default_variables.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/30 10:52:49 by carlos-j         ###   ########.fr       */
+/*   Created: 2024/11/30 14:12:05 by carlos-j          #+#    #+#             */
+/*   Updated: 2024/11/30 14:43:40 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-External functs.: open, close, read, write, malloc, free, perror, strerror, exit
-• All functions of the math library (-lm compiler option, man man 3 math)
-• All functions of the MiniLibX
-• ft_printf and any equivalent YOU coded
-Libft authorized: Yes
-*/
+#include "../so_long.h"
 
-/*TODO:
-initialize all sprites to NULL, free them all on exit;
-
-check data races?
-check sanitize?
-
-map with empty line at the end
-
-change sprite of game over with background sprite
-
-move count increases when you press a dead key
-
-
-*/
-
-#include "so_long.h"
-
-// MOVE DEFAULTS TO ANOTHER FILE...
 void	default_values(t_game *game)
 {
 	game->movements = 0;
@@ -51,10 +27,10 @@ void	default_values(t_game *game)
 	game->nr_walls = 0;
 	game->wall_x = NULL;
 	game->wall_y = NULL;
-	game->image = NULL;
 	game->nr_enemies = 0;
 	game->enemy_x = NULL;
 	game->enemy_y = NULL;
+	game->image = NULL;
 	game->addr = NULL;
 	game->last_direction = '\0';
 	game->win_state = 0;
@@ -86,7 +62,7 @@ void	default_score_left_center(t_game *game)
 	game->score.center_9 = NULL;
 }
 
-void	default_score_left_default(t_game *game)
+void	default_score_right_default(t_game *game)
 {
 	game->score.right_0 = NULL;
 	game->score.right_1 = NULL;
@@ -126,36 +102,10 @@ void	default_sprites(t_game *game)
 	game->map.map_read_fd = 0;
 }
 
-int	exit_game(t_game *game)
+void	defaults(t_game *game)
 {
-	if (game->win_state == 1)
-		cleanup_and_exit(game, "Congratulations, you won!\n", 0);
-	cleanup_and_exit(game, "Error\nYou quit the game.\n", 1);
-	return (0);
-}
-
-void	hooks(t_game *game)
-{
-	mlx_hook(game->minilibx.window_mlx, 2, 1, handle_key, game);
-	mlx_hook(game->minilibx.window_mlx, 17, 0, &exit_game, game);
-	mlx_loop(game->minilibx.connect_mlx);
-}
-
-int	main(int argc, char **argv)
-{
-	t_game	game;
-	int		img_size;
-	int		read_map;
-
-	default_values(&game);
-	default_sprites(&game);
-	img_size = SPRITE_SIZE;
-	if (extension_check(argc, argv, &game) != 1)
-		cleanup_and_exit(&game, "Error\nFailed to open map file.\n", 5);
-	read_map = map_checker(argv[1], &game);
-	if (read_map == 0 || read_map == -1)
-		exit(1);
-	game_setup(&game, img_size);
-	hooks(&game);
-	return (0);
+	default_values(game);
+	default_score_left_center(game);
+	default_score_right_default(game);
+	default_sprites(game);
 }
