@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:14:00 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:45:34 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:52:49 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ check sanitize?
 
 map with empty line at the end
 
-map from a non existetent file >>>> 1  block leaks
-
-change sprite of game over with enemy to wall on background
-
-1 block with leaks when quiting after game won
+change sprite of game over with background sprite
 
 move count increases when you press a dead key
 
@@ -38,7 +34,6 @@ move count increases when you press a dead key
 */
 
 #include "so_long.h"
-
 
 // MOVE DEFAULTS TO ANOTHER FILE...
 void	default_values(t_game *game)
@@ -155,8 +150,8 @@ int	main(int argc, char **argv)
 	default_values(&game);
 	default_sprites(&game);
 	img_size = SPRITE_SIZE;
-	if (extension_check(argc, argv, &game) == 1)
-		exit(0);
+	if (extension_check(argc, argv, &game) != 1)
+		cleanup_and_exit(&game, "Error\nFailed to open map file.\n", 5);
 	read_map = map_checker(argv[1], &game);
 	if (read_map == 0 || read_map == -1)
 		exit(1);

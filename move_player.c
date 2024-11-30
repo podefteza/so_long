@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:41:56 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 14:18:24 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:08:12 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ int	process_key_input(int key, t_game *game, int *new_x, int *new_y)
 		game->last_direction = 'R';
 		game->sprites.player = game->sprites.p_right;
 	}
+	else
+		return (1);
 	return (0);
 }
 
@@ -168,7 +170,8 @@ int	handle_key(int key, t_game *game)
 	new_y = game->position_y;
 	if (game->win_state == 1)
 		cleanup_and_exit(game, "Congratulations, you won!\n", 0);
-	process_key_input(key, game, &new_x, &new_y);
+	if (process_key_input(key, game, &new_x, &new_y) == 1)
+		return (0);
 	if (player_between_walls(game, new_x, new_y) == 0)
 		return (0);
 	player_on_exit(game);

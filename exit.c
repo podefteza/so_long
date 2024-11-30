@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:28:21 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 14:23:44 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:52:28 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,10 @@ int	cleanup_and_exit(t_game *game, char *message, int exit_code)
 	if (game->minilibx.window_mlx)
 		mlx_destroy_window(game->minilibx.connect_mlx,
 			game->minilibx.window_mlx);
-	// non-existing file??
-	free_game_over_sprites(game, exit_code);
-	if (exit_code != 42)
+	if (exit_code != 5)
+		free_game_over_sprites(game, exit_code);
+	if (exit_code != 42 && exit_code != 5)
 	{
-		//if (exit_code != 33)
 		free_player_sprites(game, exit_code);
 		free_map_sprites(game, exit_code);
 		free_score_left(game);

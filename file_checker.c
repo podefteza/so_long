@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:22:03 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/25 13:14:08 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:52:22 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	extension_check(int argc, char **argv, t_game *game)
 	size_t	len;
 
 	if (argc != 2)
-		cleanup_and_exit(game, "Error\nUsage: ./so_long map.ber\n", 42);
+		cleanup_and_exit(game, "Error\nUsage: ./so_long map.ber\n", 5);
 	len = ft_strlen(argv[1]);
 	if ((len < 4 || ft_strncmp(argv[1] + len - 4, ".ber", 4) != 0))
 		cleanup_and_exit(game,
-			"Error\nInvalid file extension. Use .ber files only.\n", 42);
-	return (0);
+			"Error\nInvalid file extension. Use .ber files only.\n", 5);
+	return (1);
 }
 
 void	invalid_read(t_game *game, int count)
@@ -44,7 +44,11 @@ int	map_checker(char *argv, t_game *game)
 		cleanup_and_exit(game, "Memory allocation failed for buffer.\n", 42);
 	game->map.map_read_fd = open(argv, O_RDONLY);
 	if (game->map.map_read_fd == -1)
-		cleanup_and_exit(game, "Error\nFailed to open map file.\n", 42);
+	{
+		if (game->map.buffer)
+			free(game->map.buffer);
+		cleanup_and_exit(game, "Error\nFailed to open map file.\n", 5);
+	}
 	count = read(game->map.map_read_fd, game->map.buffer, BUFFER_SIZE);
 	if (count < 1)
 		invalid_read(game, count);
