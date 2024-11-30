@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:41:56 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/30 11:08:12 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 12:30:06 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	game_over(t_game *game, int new_x, int new_y)
 		if (game->last_direction == 'L')
 			game->sprites.player = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			E_R_P_L_SPRITE, &img_size, &img_size);
-		else
+		else if (game->last_direction == 'R')
 			game->sprites.player = mlx_xpm_file_to_image(game->minilibx.connect_mlx,
 			E_R_P_R_SPRITE, &img_size, &img_size);
 		//mlx_destroy_image(game->minilibx.connect_mlx, game->sprites.background);
@@ -135,7 +135,6 @@ void	player_on_exit(t_game *game)
 
 int	process_key_input(int key, t_game *game, int *new_x, int *new_y)
 {
-	// correct exit code to free all sprites + add free of enemy sprites + game?over sprites
 	if (game_over(game, game->position_x, game->position_y) == 1)
 		cleanup_and_exit(game, "Game over. You touched an enemy.\n", 33);
 	if (key == 65307)

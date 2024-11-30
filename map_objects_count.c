@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:50:19 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 01:02:33 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:18:36 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	player_count(t_game *game)
 	{
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("Map must have 1 player start, 1 exit, ", 2);
-		cleanup_and_exit(game, "and at least 1 collectible.\n", 42);
+		cleanup_and_exit(game, "and at least 1 collectible.\n", 6);
 	}
 	return (1);
 }

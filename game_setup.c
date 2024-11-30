@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:33:01 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/28 13:56:43 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/11/30 12:22:34 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	game_setup(t_game *game, int img_size)
 	count_walls(game);
 	scan_map(game);
 	load_static_elements(game);
+	if (game->movements == 0)
+		game->last_direction = 'R';
 	mlx_put_image_to_window(game->minilibx.connect_mlx,
 		game->minilibx.window_mlx, game->sprites.player, SPRITE_SIZE
 		* game->position_x, SPRITE_SIZE * game->position_y);
