@@ -1,6 +1,6 @@
 # 🕹️ so_long: A 2D Game in C with MinilibX
 <p align="center">
-  <img src="https://github.com/podefteza/so_long/blob/main/so_long.gif" alt="so_long" >
+  <img src="https://github.com/podefteza/so_long/blob/main/42_porto_map.gif" alt="so_long" >
 </p>
 
 ## Introduction  
