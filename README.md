@@ -75,11 +75,11 @@ This approach guarantees that every path is explored until either all goals are 
 
 
 <p align="center">
-  <img src="https://github.com/podefteza/so_long/blob/main/Exemple%20Map.png" alt="Exemple Map" height="289">
-  <img src="https://github.com/podefteza/so_long/blob/main/Flood%20Fill%20Order.png" alt="Flood Fill Order" height="289">
+  <img src="https://github.com/podefteza/so_long/blob/main/Exemple%20Map.png" alt="Exemple Map" height="189">
+  <img src="https://github.com/podefteza/so_long/blob/main/Flood%20Fill%20Order.png" alt="Flood Fill Order" height="189">
 </p>
 <p align="center">
-  <img src="https://github.com/podefteza/so_long/blob/main/Loaded%20Map.png" alt="Loaded Map" height="289">
-  <img src="https://github.com/podefteza/so_long/blob/main/Visualization.gif" alt="Flood Fill Visualization" height="289">
+  <img src="https://github.com/podefteza/so_long/blob/main/Loaded%20Map.png" alt="Loaded Map" height="189">
+  <img src="https://github.com/podefteza/so_long/blob/main/Visualization.gif" alt="Flood Fill Visualization" height="189">
 </p>
 
