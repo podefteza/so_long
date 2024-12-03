@@ -1,4 +1,7 @@
 # 🕹️ so_long: A 2D Game in C with MinilibX
+<p align="center">
+  <img src="https://github.com/podefteza/so_long/blob/main/so_long.gif" alt="so_long" >
+</p>
 
 ## Introduction  
 **so_long** is a 2D game developed in C using the **MinilibX** graphical library. This project is part of the 42 curriculum and focuses on fundamental programming concepts such as memory management, recursive algorithms, and event-driven programming. The objective is to guide the player through a maze-like map, collect items, and reach the exit while avoiding obstacles. The project emphasizes clean code, adhering to the **Norminette** coding standard, and implementing an efficient **flood-fill algorithm** for path validation.
