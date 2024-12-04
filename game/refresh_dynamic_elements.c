@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:35:50 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/30 15:21:54 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:04:17 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	refresh_score_left(t_game *game)
 		game->score.score_left = game->score.left_8;
 	if (game->movements >= 900 && game->movements <= 999)
 		game->score.score_left = game->score.left_9;
-	if (game->movements > 5)
+	if (game->movements > 999)
 		cleanup_and_exit(game, "Error\nNo more moves allowed.\n", 1);
 }
 

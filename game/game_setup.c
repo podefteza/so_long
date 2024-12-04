@@ -6,7 +6,7 @@
 /*   By: carlos-j <carlos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:33:01 by carlos-j          #+#    #+#             */
-/*   Updated: 2024/11/30 15:21:09 by carlos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:02:11 by carlos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	screen_check(t_game *game)
 	window_width = SPRITE_SIZE * game->map.columns;
 	window_height = SPRITE_SIZE * game->map.lines;
 	if (window_width > screen_width || window_height > screen_height)
-		cleanup_and_exit(game, "Error\nMap too large to fit the screen.\n", 42);
+		cleanup_and_exit(game, "Error\nMap too large to fit the screen.\n", 13);
 	game->minilibx.window_mlx = mlx_new_window(game->minilibx.connect_mlx,
 			window_width, window_height, "so_long");
 	game->image = mlx_new_image(game->minilibx.connect_mlx, window_width,
