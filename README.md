@@ -86,3 +86,5 @@ This approach guarantees that every path is explored until either all goals are 
   <img src="https://github.com/podefteza/so_long/blob/main/Visualization.gif" alt="Flood Fill Visualization" height="189">
 </p>
 
+## Credits:
+The sprites of the characters used in the game were made by [Pixel Figures](https://www.tumblr.com/pixelfigures/68724021934/the-office-pixel-art).
