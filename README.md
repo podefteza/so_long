@@ -43,6 +43,8 @@ The player starts at a designated position on the map and must:
 
 ## Compilation and Execution  
 ```bash
+git clone https://github.com/podefteza/so_long
+git clone https://github.com/42Paris/minilibx-linux
 make
 ./so_long map_name.ber
 ```
