@@ -90,3 +90,6 @@ This approach guarantees that every path is explored until either all goals are 
 
 ## Credits:
 The sprites of the characters used in the game were made by [Pixel Figures](https://www.tumblr.com/pixelfigures/68724021934/the-office-pixel-art).
+You can choose between 3 different players: Dwight, Kevin or Stanley by doing "make character_name", for example:
+```bash
+make character_kevin
