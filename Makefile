@@ -79,4 +79,8 @@ character_stanley:
 	@cp sprites/stanley/*.xpm sprites/
 	@echo "You chose Stanley as your character."
 
+character_santa:
+	@cp sprites/santa/*.xpm sprites/
+	@echo "You chose Santa as your character."
+
 .PHONY: all clean fclean re
